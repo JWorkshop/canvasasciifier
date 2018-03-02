@@ -1,8 +1,11 @@
 # canvasasciifier
 
-A <pre> text React component which renders ascii from a canvas.
+A \<pre\> text React component which renders ascii from a canvas.
 
-![NPM version][npm-image]][npm-url]![build status][travis-image]][travis-url]![node version][node-image]][node-url]![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![node version][node-image]][node-url]
+[![npm download][download-image]][download-url]
 
 [npm-image]: http://img.shields.io/npm/v/@jworkshop/canvasasciifier.svg
 [npm-url]: http://npmjs.org/package/@jworkshop/canvasasciifier

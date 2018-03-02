@@ -1,6 +1,6 @@
 {
   "name": "@jworkshop/canvasasciifier",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description":
     "A <pre> text React component which renders ascii from a canvas.",
   "author": "jworkshop <john.joydesign@gmail.com>",
