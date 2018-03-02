@@ -1,0 +1,10 @@
+.asciifier-container .asciifier-text {
+  position: absolute;
+  margin: 0px;
+  background: none;
+  width: auto;
+  height: auto;
+  color: #000000;
+  font: bold 10px/7px Courier New, Courier, Andale Mono, monospace; }
+  .asciifier-container .asciifier-text.asciifier-calibrator {
+    visibility: hidden; }
