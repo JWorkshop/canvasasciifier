@@ -31,12 +31,6 @@ import CanvasAsciifier from "@jworkshop/canvasasciifier";
 import "./style.css";
 
 class Example extends Component {
-  constructor(props) {
-    super(props);
-
-    this.resizeHandler = this.resizeHandler.bind(this);
-  }
-
   someFunction() {
     const { myCanvas, myAsciifier } = this;
 
