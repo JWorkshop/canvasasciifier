@@ -1,6 +1,6 @@
 {
   "name": "@jworkshop/canvasasciifier",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description":
     "A <pre> text React component which renders ascii from a canvas.",
   "author": "jworkshop <john.joydesign@gmail.com>",
@@ -41,7 +41,8 @@
       "ecmaVersion": 8,
       "sourceType": "module",
       "ecmaFeatures": {
-        "jsx": true
+        "jsx": true,
+        "experimentalObjectRestSpread": true
       }
     },
     "env": {

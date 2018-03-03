@@ -93,14 +93,11 @@ class CanvasAsciifier extends Component {
   }
 
   render() {
-    const { className, style, textClassName, textStyle } = this.props;
+    const { className, textClassName, textStyle, ...rest } = this.props;
     const { asciiCode } = this.state;
 
     return (
-      <div
-        className={ClassNames("asciifier-container", className)}
-        style={style}
-      >
+      <div className={ClassNames("asciifier-container", className)} {...rest}>
         <pre
           ref={calibrator => (this.calibrator = calibrator)}
           className={ClassNames(
@@ -126,7 +123,6 @@ class CanvasAsciifier extends Component {
 
 CanvasAsciifier.propTypes = {
   className: PropTypes.string,
-  style: PropTypes.shape(),
   textClassName: PropTypes.string,
   textStyle: PropTypes.shape(),
   invert: PropTypes.bool,
@@ -135,7 +131,6 @@ CanvasAsciifier.propTypes = {
 
 CanvasAsciifier.defaultProps = {
   className: "",
-  style: {},
   textClassName: "",
   textStyle: {},
   invert: false,
