@@ -1,6 +1,6 @@
 {
   "name": "@jworkshop/canvasasciifier",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description":
     "A <pre> text React component which renders ascii from a canvas.",
   "author": "jworkshop <john.joydesign@gmail.com>",
@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.7.2",
@@ -35,16 +34,14 @@
       "npm run build-css && babel src -d lib --copy-files --ignore *.scss"
   },
   "babel": {
-    "presets": ["env", "react"],
-    "plugins": ["transform-object-rest-spread"]
+    "presets": ["env", "react"]
   },
   "eslintConfig": {
     "parserOptions": {
       "ecmaVersion": 8,
       "sourceType": "module",
       "ecmaFeatures": {
-        "jsx": true,
-        "experimentalObjectRestSpread": true
+        "jsx": true
       }
     },
     "env": {
