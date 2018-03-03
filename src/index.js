@@ -6,6 +6,15 @@ import "./style.css";
 
 const { min, floor } = Math;
 
+const SAMPLE_SIZE = 10;
+const SAMPLE_ASCII = Array(SAMPLE_SIZE)
+  .fill(
+    Array(SAMPLE_SIZE)
+      .fill(".")
+      .join("")
+  )
+  .join("\n");
+
 class CanvasAsciifier extends Component {
   constructor(props) {
     super(props);
@@ -28,49 +37,51 @@ class CanvasAsciifier extends Component {
   /** Generate ascii text from the canvas image data. */
   generateAsciiCode(canvasElement) {
     const { calibrator } = this;
-    const { sampleSize, invert, asciiData } = this.props;
+    const { invert, asciiData } = this.props;
     const asciiIntervals = 255 / asciiData.length;
 
-    this.textWidth = calibrator.offsetWidth / sampleSize;
-    this.textHeight = calibrator.offsetHeight / sampleSize;
-
-    const { width, height, offsetWidth, offsetHeight } = canvasElement;
-
-    const canvasWidthScale = offsetWidth / width;
-    const canvasHeightScale = offsetHeight / height;
-
-    const widthScale = this.textWidth / canvasWidthScale;
-    const heightScale = this.textHeight / canvasHeightScale;
-
-    const context = canvasElement.getContext("2d");
-    const pixels = context.getImageData(0, 0, width, height).data;
+    this.textWidth = calibrator.offsetWidth / SAMPLE_SIZE;
+    this.textHeight = calibrator.offsetHeight / SAMPLE_SIZE;
 
     let asciiCode = "";
 
-    for (let y = 0; y < height; y += heightScale) {
-      for (let x = 0; x < width; x += widthScale) {
-        let i = Math.round(y) * width * 4 + Math.round(x) * 4;
+    const { width, height, offsetWidth, offsetHeight } = canvasElement;
 
-        /* turn RGB color to grayscale. */
-        let averageValue = pixels[i] + pixels[i + 1] + pixels[i + 2];
+    if (width && height && offsetWidth && offsetHeight) {
+      const canvasWidthScale = offsetWidth / width;
+      const canvasHeightScale = offsetHeight / height;
 
-        averageValue = averageValue / 3 * pixels[i + 3] / 255;
+      const widthScale = this.textWidth / canvasWidthScale;
+      const heightScale = this.textHeight / canvasHeightScale;
 
-        /* turn RGB color to grayscale. */
-        if (invert !== true) {
-          averageValue = 255 - averageValue;
+      const context = canvasElement.getContext("2d");
+      const pixels = context.getImageData(0, 0, width, height).data;
+
+      for (let y = 0; y < height; y += heightScale) {
+        for (let x = 0; x < width; x += widthScale) {
+          let i = Math.round(y) * width * 4 + Math.round(x) * 4;
+
+          /* turn RGB color to grayscale. */
+          let averageValue = pixels[i] + pixels[i + 1] + pixels[i + 2];
+
+          averageValue = averageValue / 3 * pixels[i + 3] / 255;
+
+          /* turn RGB color to grayscale. */
+          if (invert !== true) {
+            averageValue = 255 - averageValue;
+          }
+
+          /* work out the index of the asciiData. */
+          const index = min(
+            floor(averageValue / asciiIntervals),
+            asciiData.length - 1
+          );
+
+          asciiCode += asciiData[index];
         }
 
-        /* work out the index of the asciiData. */
-        const index = min(
-          floor(averageValue / asciiIntervals),
-          asciiData.length - 1
-        );
-
-        asciiCode += asciiData[index];
+        asciiCode += "\n";
       }
-
-      asciiCode += "\n";
     }
 
     return asciiCode;
@@ -82,13 +93,7 @@ class CanvasAsciifier extends Component {
   }
 
   render() {
-    const {
-      className,
-      style,
-      textClassName,
-      textStyle,
-      sampleSize
-    } = this.props;
+    const { className, style, textClassName, textStyle } = this.props;
     const { asciiCode } = this.state;
 
     return (
@@ -105,13 +110,7 @@ class CanvasAsciifier extends Component {
           )}
           style={textStyle}
         >
-          {Array(sampleSize)
-            .fill(
-              Array(sampleSize)
-                .fill(".")
-                .join("")
-            )
-            .join("\n")}
+          {SAMPLE_ASCII}
         </pre>
         <pre
           ref={asciiElement => (this.asciiElement = asciiElement)}
@@ -130,7 +129,6 @@ CanvasAsciifier.propTypes = {
   style: PropTypes.shape(),
   textClassName: PropTypes.string,
   textStyle: PropTypes.shape(),
-  sampleSize: PropTypes.number,
   invert: PropTypes.bool,
   asciiData: PropTypes.arrayOf(PropTypes.string)
 };
@@ -140,7 +138,6 @@ CanvasAsciifier.defaultProps = {
   style: {},
   textClassName: "",
   textStyle: {},
-  sampleSize: 10,
   invert: false,
   asciiData: [" ", ".", ",", ";", "|", "*", "%", "@", "X", "#", "W", "M"]
 };
