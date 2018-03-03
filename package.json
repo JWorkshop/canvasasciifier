@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.7.2",
@@ -34,7 +35,8 @@
       "npm run build-css && babel src -d lib --copy-files --ignore *.scss"
   },
   "babel": {
-    "presets": ["env", "react"]
+    "presets": ["env", "react"],
+    "plugins": ["transform-object-rest-spread"]
   },
   "eslintConfig": {
     "parserOptions": {
