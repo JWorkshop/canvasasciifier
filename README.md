@@ -57,6 +57,7 @@ class Example extends Component {
         textClassName="textClassName"
         textStyle={ ... }
         invert={true}
+        asciiData={[" ", ".", ",", ";", "|", "*", "%", "@", "X", "#", "W", "M"]}
       />
     );
   }

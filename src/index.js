@@ -93,16 +93,16 @@ class CanvasAsciifier extends Component {
   }
 
   render() {
-    const { className, textClassName, textStyle, onClick } = this.props;
+    const { className, textClassName, textStyle } = this.props;
     const { asciiCode } = this.state;
 
     return (
       <div
         className={ClassNames("asciifier-container", className)}
-        onClick={onClick}
+        onClick={this.props.onClick}
       >
         <pre
-          ref={calibrator => (this.calibrator = calibrator)}
+          ref={c => (this.calibrator = c)}
           className={ClassNames(
             "asciifier-text",
             "asciifier-calibrator",
@@ -113,7 +113,7 @@ class CanvasAsciifier extends Component {
           {SAMPLE_ASCII}
         </pre>
         <pre
-          ref={asciiElement => (this.asciiElement = asciiElement)}
+          ref={a => (this.asciiElement = a)}
           className={ClassNames("asciifier-text", textClassName)}
           style={textStyle}
         >
